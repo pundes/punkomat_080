@@ -6,18 +6,18 @@ int f = 500;
 float distance = 0.0;
 float speed = 1;
 float objStep = 150;
+float angle;
 
 float meshDistortion = 0.05;
 
 PVector[][] circles = new PVector[cir][points];
 int[][] randoms = new int[cir][points];
 PVector[][] distortion = new PVector[cir][points];
-float[] val = {8.23636, 19.09091, 31,75455, 53,46364, 62.50909, 78,79091, 87.83636, 194,57273};
+float[] val = {8.23636, 19.09091, 31.75455, 78.79091, 87.83636};
 
 void setup() {
   size(1280,720, P3D);
   //frameRate(10);
-  points();
   calculateDistortion();
   calculateRandom();
 
@@ -27,19 +27,20 @@ void draw() {
    background(255);
    //frameRate(1);
    translate(width/2, height/2);
-   rotateZ(frameCount*0.0025);
+   rotateZ(frameCount*0.005);
+   points();
     changeRandom();
    drawCircle();
    //saveFrame ("img/img####.jpg");
 }
 
 void points() {
-  float angle;
-  
-  if(frameCount % 128 == 0) {
+  if(frameCount % 25 == 0) {
     int rand = (int) random(1, val.length);
     angle = val[rand];
   }
+  
+  println(angle);
   
   for(int j = 0; j < cir; j++) {
     for(int i = 0; i < points; i++) {
